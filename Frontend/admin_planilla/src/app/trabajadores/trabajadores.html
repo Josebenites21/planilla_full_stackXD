@@ -1,0 +1,53 @@
+<!-- Select para mes -->
+<div class="mes-selector">
+  <select [(ngModel)]="mesSeleccionado" (change)="cargarPagosPorMes()">
+    <option value="">Seleccionar mes</option>
+    <option *ngFor="let mes of mesesDisponibles" [value]="mes">
+      {{ formatearFecha(mes) }}
+    </option>
+  </select>
+</div>
+
+<!-- Tabla de pagos del mes -->
+<div *ngIf="pagosDelMes.length > 0">
+  <h3>Pagos del mes: {{ formatearFecha(mesSeleccionado) }}</h3>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Empleado</th>
+        <th>Cargo</th>
+        <th>Departamento</th>
+        <th>Sueldo Base</th>
+        <th>Aumento</th>
+        <th>Bono</th>
+        <th>Horas Extra</th>
+        <th>Adelanto</th>
+        <th>Sueldo Final</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pago of pagosDelMes">
+        <td>{{ pago.nombre }}</td>
+        <td>{{ pago.cargo }}</td>
+        <td>{{ pago.departamento }}</td>
+        <td>{{ pago.sueldoBase | currency:'PEN' }}</td>
+        <td>{{ pago.aumento | currency:'PEN' }}</td>
+        <td>{{ pago.bono | currency:'PEN' }}</td>
+        <td>{{ pago.horasExtra | currency:'PEN' }}</td>
+        <td>{{ pago.adelanto | currency:'PEN' }}</td>
+        <td>{{ pago.sueldoFinal | currency:'PEN' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Mensaje cuando no hay pagos -->
+<div *ngIf="mesSeleccionado && pagosDelMes.length === 0" class="no-pagos">
+  <p>No hay pagos registrados para el mes seleccionado.</p>
+</div>
+
+<!-- Mensaje cuando no se ha seleccionado mes -->
+<div *ngIf="!mesSeleccionado" class="seleccionar-mes">
+  <p>Selecciona un mes para ver los pagos registrados.</p>
+</div>

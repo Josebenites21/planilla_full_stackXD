@@ -1,0 +1,42 @@
+<div class="form-container">
+  <h2>Registrar Trabajador</h2>
+<form (ngSubmit)="guardarTrabajador()" #form="ngForm" class="form-container">
+  <label>
+    Nombre:
+    <input type="text" [(ngModel)]="nuevoTrabajador.nombre" name="nombre" placeholder="Nombre del trabajador" required />
+  </label>
+
+  <label>
+    Cargo:
+    <input type="text" [(ngModel)]="nuevoTrabajador.cargo" name="cargo" placeholder="Cargo o puesto" required />
+  </label>
+
+  <label>
+    Departamento:
+    <input type="text" [(ngModel)]="nuevoTrabajador.departamento" name="departamento" placeholder="Departamento" required />
+  </label>
+
+  <label>
+    Sueldo:
+    <input type="number" [(ngModel)]="nuevoTrabajador.sueldo" name="sueldo" placeholder="Sueldo en soles" min="0" required />
+  </label>
+
+  <label>
+    Número de Teléfono:
+    <input type="tel" [(ngModel)]="nuevoTrabajador.numero" name="numero" placeholder="Número de teléfono" />
+  </label>
+
+  <label>
+    Dirección:
+    <input type="text" [(ngModel)]="nuevoTrabajador.direccion" name="direccion" placeholder="Dirección del trabajador" />
+  </label>
+
+  <label>
+    Fecha de Ingreso:
+    <input type="date" [(ngModel)]="nuevoTrabajador.ingreso_laboral" name="ingreso_laboral" />
+  </label>
+
+  <button type="submit">💾 Guardar</button>
+</form>
+
+</div>

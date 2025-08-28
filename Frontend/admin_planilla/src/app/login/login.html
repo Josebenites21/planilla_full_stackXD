@@ -1,0 +1,49 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="logo-container">
+        <div class="logo-icon">📊</div>
+        <h1 class="login-title">Sistema de Planillas</h1>
+        <p class="login-subtitle">Administración de Personal</p>
+      </div>
+    </div>
+    
+    <form (ngSubmit)="login()" #form="ngForm" class="login-form">
+      <div class="input-group">
+        <div class="input-icon">
+          <span class="icon">👤</span>
+          <input 
+            [(ngModel)]="usuario" 
+            name="usuario" 
+            placeholder="Usuario" 
+            required
+            class="form-input"
+            autocomplete="username">
+        </div>
+      </div>
+      
+      <div class="input-group">
+        <div class="input-icon">
+          <span class="icon">🔒</span>
+          <input 
+            [(ngModel)]="password" 
+            name="password" 
+            type="password" 
+            placeholder="Contraseña" 
+            required
+            class="form-input"
+            autocomplete="current-password">
+        </div>
+      </div>
+      
+      <button type="submit" class="login-btn">
+        <span class="btn-text">Iniciar Sesión</span>
+        <span class="btn-icon">→</span>
+      </button>
+    </form>
+    
+    <div class="login-footer">
+      <p class="footer-text">© 2024 HWPerú - Sistema de Gestión</p>
+    </div>
+  </div>
+</div>

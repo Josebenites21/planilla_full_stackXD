@@ -1,0 +1,86 @@
+<header>
+  <h1>Gestión de Planillas de Trabajadores</h1>
+  <button (click)="logout()">Cerrar sesión</button>
+</header>
+
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Cargo</th>
+        <th>Departamento</th>
+        <th>Sueldo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let t of trabajadores; let i = index">
+        <tr>
+          <td>
+            <button (click)="toggleExpand(i)">
+              {{ expandedIndex === i ? 'v' : '>' }}
+            </button>
+          </td>
+          <td>{{ i + 1 }}</td>
+          <td>{{ t.nombre }}</td>
+          <td>{{ t.cargo }}</td>
+          <td>{{ t.departamento }}</td>
+          <td>{{ t.sueldo | currency:'PEN':'symbol-narrow':'1.2-2' }}</td>
+          <td>
+            <button (click)="abrirModalInfo(t)">Ver</button>
+          </td>
+        </tr>
+
+        <tr *ngIf="expandedIndex === i">
+          <td colspan="7">
+            <div class="extra-fields">
+              <label>Aumento:</label>
+              <input type="number" [(ngModel)]="t.aumento">
+
+              <label>Adelanto:</label>
+              <input type="number" [(ngModel)]="t.adelanto">
+
+              <label>Bono:</label>
+              <input type="number" [(ngModel)]="t.bono">
+
+              <label>Horas Extra:</label>
+              <input type="number" [(ngModel)]="t.horasExtra">
+
+              <div style="margin-top: 10px; text-align: right;">
+      <button class="global-btn" (click)="guardarCambios(t)">
+        💾 Registar Dataos
+      </button>
+    </div>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</section>
+
+<button (click)="btnRegistrar()">Registrar</button>
+<a href="/trabajadores" target="_blank">Consultar</a>
+
+<div class="modal" [class.show]="modalInfoAbierto">
+  <div class="modal-content">
+    <span class="cerrar" (click)="cerrarModalInfo()">&times;</span>
+    <h2>Detalle del trabajador</h2>
+
+    <div class="info">
+      <div class="dato"><strong>Nombre:</strong> <span>{{trabajadorSeleccionado?.nombre}}</span></div>
+      <div class="dato"><strong>Cargo:</strong> <span>{{trabajadorSeleccionado?.cargo}}</span></div>
+      <div class="dato"><strong>Departamento:</strong> <span>{{trabajadorSeleccionado?.departamento}}</span></div>
+      <div class="dato"><strong>Sueldo:</strong> 
+        <span>{{ trabajadorSeleccionado?.sueldo | currency:'PEN':'symbol-narrow':'1.2-2' }}</span>
+      </div>
+      <div class="dato"><strong>Telefono:</strong><span>{{trabajadorSeleccionado?.telefono}}</span></div>
+      
+      
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,421 @@
+/*
+ * Hoja de Estilos CSS para el Sistema de Gestión de Planillas
+ * Versión 2: Diseño Minimalista y Profesional
+ * Autor: Asistente Gemini
+ *
+ * Este diseño se centra en la legibilidad, el contraste y la limpieza.
+ * Utiliza una paleta de colores neutros con acentos sutiles para
+ * una experiencia de usuario corporativa.
+ */
+
+/* ===================
+  Variables de Color y Tipografía
+===================
+*/
+:root {
+  --color-background: #F8F9FA; /* Blanco muy sutil */
+  --color-surface: #FFFFFF; /* Blanco puro para tarjetas y elementos */
+  --color-text-main: #34495E; /* Azul oscuro para texto principal */
+  --color-text-secondary: #7F8C8D; /* Gris para texto secundario */
+  --color-primary: #3498DB; /* Azul corporativo para acentos */
+  --color-primary-dark: #2980B9; /* Azul oscuro para hover */
+  --color-success: #2ECC71; /* Verde para acciones de éxito */
+  --color-danger: #E74C3C; /* Rojo para acciones de peligro */
+  --color-border-light: #ECF0F1; /* Borde muy claro */
+  --color-shadow: rgba(0, 0, 0, 0.08); /* Sombra sutil */
+  --font-family: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-background);
+  margin: 0;
+  padding: 24px;
+  color: var(--color-text-main);
+}
+
+/* ===================
+Contenedor Principal
+===================
+*/
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===================
+Header y Botones
+===================
+*/
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background-color: var(--color-surface);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px var(--color-shadow);
+  margin-bottom: 24px;
+  border: 1px solid var(--color-border-light);
+}
+
+header h1 {
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  font-size: 2em;
+  font-weight: 600;
+  margin: 0 auto;
+  color: var(--color-text-main);
+  display: block;
+  width: 100%;
+}
+
+header button, .global-btn, .btn-consultar {
+  background-color: #7B42F6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+header button:hover, .btn-consultar:hover {
+  background-color: #6B21A8;
+  transform: translateY(-1px);
+}
+
+.global-btn {
+  background-color: var(--color-primary);
+}
+
+.global-btn:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* ===================
+Tabla de Trabajadores
+===================
+*/
+section {
+  background-color: var(--color-surface);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px var(--color-shadow);
+  padding: 24px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border-light);
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+thead th {
+  text-align: left;
+  padding: 16px 20px;
+  font-weight: 600;
+  font-size: 0.9em;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--color-border-light);
+}
+
+tbody tr {
+  background-color: var(--color-surface);
+  border-radius: 8px;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 5px var(--color-shadow);
+}
+
+tbody tr:hover {
+  box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+td {
+  padding: 16px 20px;
+  vertical-align: middle;
+  color: var(--color-text-main);
+  border: none;
+}
+
+/* Botones en la tabla */
+td button {
+  background: none;
+  border: none;
+  font-size: 1.1em;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+td button:hover {
+  color: var(--color-primary-dark);
+}
+
+td button.view-btn {
+  background-color: var(--color-success);
+  color: white;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.9em;
+  width: auto;
+  height: auto;
+  transition: background-color 0.2s;
+}
+
+td button.view-btn:hover {
+  background-color: #27AE60;
+}
+
+/* ===================
+Detalle Expandido
+===================
+*/
+.extra-fields {
+  padding: 20px;
+  background-color: var(--color-border-light);
+  border-radius: 8px;
+  /* Cambio a flexbox para un mejor control del espaciado */
+  display: flex; 
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.extra-fields label {
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-bottom: 5px;
+  display: block;
+}
+
+.extra-fields input {
+  /* Ajuste para que los inputs ocupen espacio de forma flexible */
+  flex-grow: 1;
+  min-width: 150px;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #BDC3C7;
+  border-radius: 6px;
+  color: var(--color-text-main);
+  font-size: 1em;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.extra-fields input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Contenedor del botón de guardar para alineación */
+.extra-fields div[style="margin-top: 10px; text-align: right;"] {
+  flex-basis: 100%; /* Asegura que el botón se vaya a una nueva línea */
+  text-align: right;
+  margin-top: 10px;
+}
+
+/* ===================
+Modal - ESTILOS PROFESIONALES Y COMPLETAMENTE OPACOS
+===================
+*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  /* 🔧 FONDO COMPLETAMENTE OPACO - NO TRANSPARENTE */
+  background: rgba(0, 0, 0, 0.8);
+  /* 🎨 Efecto de blur para el contenido de fondo */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  /* 🎨 FONDO COMPLETAMENTE SÓLIDO Y OPACO */
+  background-color: #ffffff;
+  /* 📦 Padding generoso para respiración */
+  padding: 40px;
+  /* 🎨 Bordes redondeados modernos */
+  border-radius: 16px;
+  /* 📏 Dimensiones optimizadas */
+  width: 90%;
+  max-width: 520px;
+  /* 🔧 Sombras profesionales para profundidad */
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  position: relative;
+  /* 🎨 Borde sutil para definición */
+  border: 1px solid #e1e5e9;
+  /* 🚀 Animación de entrada suave */
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+/* 🎬 Animación de entrada del modal */
+@keyframes modalSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.cerrar {
+  /* 🎯 Posicionamiento absoluto en la esquina superior derecha */
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  /* 🎨 Estilo del botón de cerrar */
+  color: #6c757d;
+  font-size: 28px;
+  font-weight: 400;
+  cursor: pointer;
+  /* 🔧 Dimensiones para fácil click */
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 🎨 Bordes redondeados */
+  border-radius: 50%;
+  /* 🚀 Transición suave */
+  transition: all 0.2s ease;
+}
+
+.cerrar:hover {
+  color: #dc3545;
+  background-color: #f8f9fa;
+  transform: scale(1.1);
+}
+
+.modal-content h2 {
+  /* 🎨 Título del modal */
+  margin: 0 0 32px 0;
+  color: #2c3e50;
+  font-size: 1.8em;
+  font-weight: 700;
+  /* 🔧 Alineación y espaciado */
+  text-align: center;
+  letter-spacing: -0.5px;
+  /* 🎨 Línea decorativa sutil */
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.modal-content .dato {
+  /* 🎨 Cada campo de información */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* 📦 Padding y espaciado */
+  padding: 18px 22px;
+  /* 🎨 Fondo sutil para cada campo */
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  /* 🎨 Borde sutil */
+  border: 1px solid #e9ecef;
+  /* 🚀 Transición suave */
+  transition: all 0.2s ease;
+}
+
+.modal-content .dato:hover {
+  /* 🎨 Efecto hover sutil */
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content .dato strong {
+  /* 🎨 Etiqueta del campo */
+  color: #495057;
+  font-weight: 600;
+  font-size: 0.95em;
+  /* 📏 Ancho mínimo para alineación */
+  min-width: 140px;
+  /* 🎨 Color de acento */
+  color: #2c3e50;
+}
+
+/* 🎨 Estilos para los valores de los campos */
+.modal-content .dato span {
+  /* 🎨 Valor del campo */
+  color: #6c757d;
+  font-weight: 500;
+  font-size: 0.95em;
+  /* 🔧 Alineación a la derecha */
+  text-align: right;
+  flex: 1;
+  /* 🎨 Color más oscuro para mejor legibilidad */
+  color: #495057;
+}
+
+/* ===================
+Responsive
+===================
+*/
+@media (max-width: 768px) {
+  header {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
+      padding: 20px;
+  }
+
+  header button {
+      width: 100%;
+  }
+
+  .extra-fields {
+      grid-template-columns: 1fr;
+  }
+
+  section {
+      padding: 16px;
+  }
+  
+  /* 🎨 Responsive para el modal en dispositivos móviles */
+  .modal-content {
+    width: 95%;
+    padding: 24px;
+    margin: 20px;
+  }
+  
+  .modal-content .dato {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px 18px;
+  }
+  
+  .modal-content .dato strong {
+    min-width: auto;
+  }
+  
+  .modal-content .dato span {
+    text-align: left;
+    width: 100%;
+  }
+  
+  .modal-content h2 {
+    font-size: 1.5em;
+    margin-bottom: 24px;
+  }
+}
