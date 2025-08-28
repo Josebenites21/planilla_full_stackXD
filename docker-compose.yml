@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   backend:
-    image: josebenites21/planilla-backend:latest
+    image: josebenites211/planilla-backend:latest
     ports:
       - "3000:3000"
     environment:
@@ -16,7 +16,7 @@ services:
         condition: on-failure
 
   frontend:
-    image: josebenites21/new_frontend:latest
+    image: josebenites211/new_frontend:latest
     ports:
       - "4200:80"
     networks:
