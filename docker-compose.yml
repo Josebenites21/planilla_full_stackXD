@@ -4,7 +4,7 @@ services:
   backend:
     image: josebenites211/planilla-backend:latest
     ports:
-      - "3000:3000"
+      - "8888:3000"  # Puerto 8888 externo, 3000 interno
     environment:
       - MONGO_URI=mongodb://admin:c1ba2a6f892999c28679f7f3d5c75c@mongodb:27017/planilla?authSource=admin
     networks:
@@ -18,7 +18,7 @@ services:
   frontend:
     image: josebenites211/new_frontend:latest
     ports:
-      - "4200:80"
+      - "9999:80"  # Puerto 9999 externo, 80 interno
     networks:
       - backend-planilla-network
     deploy:
