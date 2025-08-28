@@ -1,0 +1,53 @@
+name: 🚀 Deploy to Portainer Automatically
+
+on:
+  workflow_run:
+    workflows: ["🐳 Build and Push Backend Docker Image", "🅰️ Build and Push Frontend Docker Image"]
+    types:
+      - completed
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: 🚀 Deploy to Portainer via API
+      run: |
+        # Obtener stack ID
+        STACK_RESPONSE=$(curl -s -H "X-API-Key: ${{ secrets.PORTAINER_TOKEN }}" \
+          "${{ secrets.PORTAINER_URL }}/api/stacks")
+        
+        STACK_ID=$(echo $STACK_RESPONSE | jq -r '.[] | select(.Name=="prueba_github") | .Id')
+        
+        if [ "$STACK_ID" = "null" ] || [ -z "$STACK_ID" ]; then
+          echo "❌ No se encontró el stack 'prueba_github'"
+          exit 1
+        fi
+        
+        echo "✅ Stack ID encontrado: $STACK_ID"
+        
+        # Actualizar stack
+        UPDATE_RESPONSE=$(curl -s -X POST \
+          -H "X-API-Key: ${{ secrets.PORTAINER_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          "${{ secrets.PORTAINER_URL }}/api/stacks/$STACK_ID/update" \
+          -d '{"prune": true}')
+        
+        if [ $? -eq 0 ]; then
+          echo "✅ Deployment completado automáticamente!"
+          echo "📊 Respuesta: $UPDATE_RESPONSE"
+        else
+          echo "❌ Error en el deployment"
+          exit 1
+        fi
+
+    - name: 📝 Deployment Status
+      run: |
+        echo "🚀 Workflow: ${{ github.event.workflow_run.name }}"
+        echo "✅ Resultado: ${{ github.event.workflow_run.conclusion }}"
+        echo "🕐 Completado: ${{ github.event.workflow_run.updated_at }}"

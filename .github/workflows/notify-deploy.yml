@@ -1,0 +1,44 @@
+name: 🔔 Notify Deployment Ready
+
+on:
+  workflow_run:
+    workflows: ["🐳 Build and Push Backend Docker Image", "🅰️ Build and Push Frontend Docker Image"]
+    types:
+      - completed
+    branches: [ main ]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
+    steps:
+    - name: 📝 Deployment Notification
+      run: |
+        echo "🚀 NUEVA IMAGEN DISPONIBLE!"
+        echo "📦 Workflow: ${{ github.event.workflow_run.name }}"
+        echo "✅ Status: ${{ github.event.workflow_run.conclusion }}"
+        echo "🕐 Timestamp: ${{ github.event.workflow_run.updated_at }}"
+        echo ""
+        echo "🎯 WATCHTOWER detectará automáticamente la nueva imagen"
+        echo "⏱️ Actualización en máximo 30 segundos"
+        echo "🌐 Tu app se actualizará en: 15.235.16.229:9999"
+        echo ""
+        echo "✅ NO necesitas hacer nada manualmente!"
+        echo "🔄 Watchtower actualizará automáticamente los contenedores"
+
+    - name: 📊 Build Summary
+      run: |
+        echo "## 🔄 Build & Deploy Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 📦 Nueva imagen construida:" >> $GITHUB_STEP_SUMMARY
+        echo "- **Workflow**: ${{ github.event.workflow_run.name }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status**: ✅ Success" >> $GITHUB_STEP_SUMMARY
+        echo "- **Timestamp**: ${{ github.event.workflow_run.updated_at }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 🚀 Deployment automático:" >> $GITHUB_STEP_SUMMARY
+        echo "- **Método**: Watchtower" >> $GITHUB_STEP_SUMMARY
+        echo "- **Tiempo**: ~30 segundos" >> $GITHUB_STEP_SUMMARY
+        echo "- **URL**: 15.235.16.229:9999" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ **¡Actualización automática completada!**"
